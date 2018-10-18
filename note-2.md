@@ -52,6 +52,42 @@ def char2int(s):
 ```
 # -*- coding: utf-8 -*-
 def normalize(name):
+    return str.upper(name[0]) + str.lower(name[1:])
+L1 = ['adam', 'LISA', 'barT']
+L2 = list(map(normalize, L1))
+print(L2)
+```
+
+Python提供的`sum()`函数可以接受一个list并求和，请编写一个`prod()`函数，可以接受一个list并利用`reduce()`求积：
 
 ```
+# -*- coding: utf-8 -*-
+from functools import reduce
+def prod(L):
+    def fn(x,y):
+        return x*y
+return reduce(fn,L) 
+```
+
+***利用`map`和`reduce`编写一个`str2float`函数，把字符串`'123.456'`转换成浮点数`123.456`：***
+
+```
+# -*- coding: utf-8 -*-
+from functools import reduce
+digits = {'0' : 0, '1' : 1, '2' : 2, '3' : 3, '4' : 4, '5' : 5, '6' : 6, '7' : 7, '8' = 8, '9' = 9, '.' = -1}
+def str2float(s):
+    nums = map(lambda ch: digits[ch], s))
+    point = 0
+    def to_float(x,y)
+        if y == -1:
+           point = 1
+           return x
+        elif point = 0:
+           return x*10+y
+        else:
+           point = point*10
+           return x + y / point
+    return reduce(to_float, nums, 0.0)
+```   
+
 
