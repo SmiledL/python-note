@@ -40,7 +40,7 @@ digits = {'0' : 0, '1' : 1, '2' : 2, '3' : 3, '4' : 4, '5' : 5}
 def char2int(s):
    def fn(x, y):
        return x * 10 + y
-    def char2num(s):
+   def char2num(s):
         return digits[s]
     return reduce(fn, map(char2num, s))
 ```
@@ -90,4 +90,42 @@ def str2float(s):
     return reduce(to_float, nums, 0.0)
 ```   
 
+### 4. `filter`函数
 
+Python内建的`filter()`函数用于过滤序列,“筛选”函数
+
+`filter()`把传入的函数依次作用于每个元素，然后根据返回值是`True`还是`False`决定保留还是丢弃该元素。
+
+例：把一个序列中的空字符串删掉，可以这么写：
+
+```
+def not_empty(s):
+    return s and s.strip() # s.strip()是将字符首尾的空格删掉，and是指s和s.strip()作与计算。
+list(filter(not_empty, ['A', '', 'B', None, 'C', '  ']))
+# 结果: ['A', 'B', 'C']
+```
+
+用`filter`求素数：
+
+```
+# -*- coding: utf-8 -*-
+def _odd_iter():
+    n = 1 
+    while True:
+          n = n + 2
+          yield n
+def _not_divisible(n):
+    return lambda x: x % n > 0
+def primes():
+    yield 2
+    it = _odd_iter()
+    while True:
+        n = next(it)
+        yield n
+        it = filter(_not_dicisible(n), it)
+for n in primes():
+    if n < 1000:
+       print(n)
+    else:
+       break
+```
